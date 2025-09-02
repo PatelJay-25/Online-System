@@ -117,12 +117,16 @@ export default function CreateExam() {
       if (!response.ok) {
         throw new Error(data.error || 'Failed to create exam');
       }
-
       // Show success message
+      //when i imedditly go to some pages they are not vibale the page becuase they will destoye the page thats why
       toast.success('Exam created successfully!');
+      setTimeout(() => {
+        window.location.href = '/teacher';
+      }, 1000); // wait 1.5 seconds before navigating
+
       
       // Force a hard navigation to ensure the dashboard refreshes
-      window.location.href = '/teacher';
+      // window.location.href = '/teacher';
     } catch (err) {
       console.error('Error creating exam:', err);
       setError(err.message || 'Something went wrong');
