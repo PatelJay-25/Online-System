@@ -13,9 +13,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add an email'],
     unique: true,
+    lowercase: true,
+    trim: true,
     match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please add a valid email'
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      'Please add a valid email address'
     ]
   },
   password: {
@@ -28,6 +30,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['student', 'teacher'],
     default: 'student'
+  },
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationOtp: {
+    type: String
+  },
+  emailVerificationExpires: {
+    type: Date
   },
   createdAt: {
     type: Date,
